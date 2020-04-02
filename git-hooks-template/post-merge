@@ -1,23 +1,14 @@
 #!/bin/bash
-
-#This file was created by Ricardo Mello -> github/ricardohsmello
-
-<<COMMENT1
-This file will be executed after the merge is performed. 
-If the merge is performed for the master, 
-the script will ask if you want to delete the source branch of the merge.
-COMMENT1
-
 exec < /dev/tty
 
-# Getting the name of the current branch
+# Coletando o nome do branch atual
 branch_name=$(git branch | grep "*" | sed "s/\* //")
 
-# Getting the name of the branch that merge comes
+# Coletando o nome do branch que foi mergeado
 reflog_message=$(git reflog -1)
 merged_branch_name=$(echo $reflog_message | cut -d" " -f 4 | sed "s/://")
 
-# If the branch of merges is master, skip
+# Se o branch for do master, não faça nada.
 if [[ $merged_branch_name = "master" ]]; then
     exit 0
 fi
@@ -29,11 +20,11 @@ read -p "Deseja excluir o branch \"$merged_branch_name\" ? (y/N) " answer
 
 if [[ "$answer" == "y" ]]; then
 
-    # Deleting the local branch
+    # Excluindo o branch local
     echo "Excluindo o branch localmente \"$merged_branch_name\""
     git branch -d $merged_branch_name
 
-    # Deleting the remote branch
+    # Excluindo o branch remoto
     echo "Excluindo o branch remotamente"
     git push origin --delete $merged_branch_name
     exit 1
