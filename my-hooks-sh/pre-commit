@@ -1,0 +1,11 @@
+#! /bin/bash
+
+exec < /dev/tty
+read -p "Continue (y/n)?" choice
+case "$choice" in 
+  y|Y ) echo "Commitando ..";;
+  n|N ) echo "Cancelando.."
+        exit 1;;
+  * ) echo "Opção inválida"
+      exit 1;;
+esac
