@@ -12,7 +12,7 @@ In Dockerfile directory, run:
 ```
 
 ```
-- docker build -t ricas:nginx .
+- docker build -t ricas-nginx:latest .
 ```
 
 ```
