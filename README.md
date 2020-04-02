@@ -17,4 +17,4 @@ In Dockerfile directory, run:
 ```
 - docker run -d -p 80:80 ricas-nginx:latest
 ```
-  
+In browser -> localhost:80
